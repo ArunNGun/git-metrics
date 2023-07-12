@@ -1,3 +1,5 @@
+import Header from './components/header'
+import Sidebar from './components/sidebar'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -15,7 +17,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <Header />
+      <div className='flex md:flex-row lg:flex-row sm:flex-col xs:flex-col' style={{height:'100%',backgroundColor: '#0d1117'}}>
+        <div className='md:w-1/4 xs:w-full sm:w-full lg:1/4' style={{}}>
+        <Sidebar />
+        </div>
+        <div className='w-3/4 xs:w-full sm:w-full lg:3/4"'>
+        {children}
+        </div>
+      </div>
+        </body>
     </html>
   )
 }
