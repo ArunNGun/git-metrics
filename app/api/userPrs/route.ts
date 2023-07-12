@@ -21,7 +21,7 @@ export async function GET(req: Request){
       return new Response(JSON.stringify(processedUserPRs))
     } catch (e) {
         console.log(e)
-        return new Response(JSON.stringify([]))
+        return new Response(JSON.stringify(e))
       }
   
   }
