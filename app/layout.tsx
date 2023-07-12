@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+export const revalidate = 0;
 import Header from './components/header'
 import Sidebar from './components/sidebar'
 import './globals.css'
@@ -27,10 +29,8 @@ export default function RootLayout({
         {children}
         </div>
       </div>
-        </body>
+      </body>
     </html>
   )
 }
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0;
