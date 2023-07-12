@@ -6,10 +6,10 @@ const { Octokit } = require('@octokit/core')
 export async function GET(req: Request){
     try {
         const octokit = new Octokit({ auth: process.env.GIT_TOKEN })
-        const {searchParams} = new URL(req.url);
-        const gitUser = searchParams.get('gitUser');
-        const fromDate = searchParams.get('fromDate');
-        const toDate = searchParams.get('toDate');
+        const url = new URL(req.url);
+        const gitUser = url.searchParams.get('gitUser');
+        const fromDate = url.searchParams.get('fromDate');
+        const toDate = url.searchParams.get('toDate');
       const data = await fetchUserPulls({
         startDate: fromDate,
         endDate: toDate,
