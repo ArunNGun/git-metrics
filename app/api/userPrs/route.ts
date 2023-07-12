@@ -1,4 +1,5 @@
 //@ts-ignore
+export const dynamic='force-dynamic';
 import fetchUserPulls from '../../services/fetchUserPulls'
 import {processUserPRs} from '../../helpers/usersHelper'
 const { Octokit } = require('@octokit/core')
