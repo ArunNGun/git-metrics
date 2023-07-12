@@ -27,19 +27,16 @@ export const usePRStore = create((set, get) => (
     setSelectedUserData: (data) => set({ selectedUserData: data }),
     fetchUserPRs: async () => {
       set({ isFetchingUserPRs: true })
-      axios.get('api/userPrs', {
-        params: {
-          fromDate: get().fromDate,
-          toDate: get().toDate,
-          gitUser: get().selectedUser
-        }
-      }).then(res => {
-        set({ selectedUserData: res?.data })
-        set({ isFetchingUserPRs: false })
-      }).catch(() => {
-        set({ selectedUserData: {} })
-        set({ isFetchingUserPRs: false })
-      })
+      fetch('/api/userPrs?fromDate=' + get().fromDate + '&toDate=' + get().toDate + '&gitUser=' + get().selectedUser)
+        .then(response => response.json())
+        .then(data => {
+          set({ selectedUserData: data })
+          set({ isFetchingUserPRs: false })
+        })
+        .catch(() => {
+          set({ selectedUserData: {} })
+          set({ isFetchingUserPRs: false })
+        })
     },
     fetchUsers: async () => {
       set({ isFetchingUsers: true })
