@@ -1,4 +1,6 @@
 //@ts-ignore
+export const dynamic='force-dynamic';
+
 import fetchPulls from '../../services/fetchPulls'
 import {processPullRequests} from '../../helpers/pullRequestsHelper'
 const { Octokit } = require('@octokit/core')
