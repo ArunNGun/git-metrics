@@ -1,5 +1,5 @@
-const USRS_QRY = `query {
-  organization(login: "adobe") {
+const USRS_QRY = (org) => `query {
+  organization(login: "${org}") {
     membersWithRole(first: 100) {
       nodes {
         name
@@ -11,7 +11,7 @@ const USRS_QRY = `query {
 `
 
 export default async function ({
-  octokit
+  octokit, org = 'adobe'
 }) {
-  return await octokit.graphql(USRS_QRY)
+  return await octokit.graphql(USRS_QRY(org))
 }

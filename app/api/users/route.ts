@@ -5,11 +5,12 @@ const { Octokit } = require('@octokit/core')
 
 export async function GET(request: Request){
     try {
+        const { searchParams } = new URL(request.url)
+        const org = searchParams.get('org') || 'adobe'
         const octokit = new Octokit({ auth: process.env.GIT_TOKEN })
-        const data = await fetchUsers({ octokit })
+        const data = await fetchUsers({ octokit, org })
         const result = data.organization.membersWithRole.nodes
         const processedUsers = processUsers(result)
-        // res.json(processedUsers)
         return new Response(JSON.stringify(processedUsers))
     } catch (e) {
         console.log(e)

@@ -16,6 +16,8 @@ const Sidebar = () => {
   const toDate = usePRStore(state => state.toDate)
   const setFromDate = usePRStore(state => state.setFromDate)
   const setToDate = usePRStore(state => state.setToDate)
+  const org = usePRStore(state => state.org)
+  const setOrg = usePRStore(state => state.setOrg)
 
   const handleSearch = () => {
     if (filterTab === 'users') {
@@ -25,6 +27,11 @@ const Sidebar = () => {
     }
   }
 
+  const handleOrgChange = () => {
+    fetchUsers()
+    fetchRepos()
+  }
+
   useEffect(() => {
     fetchUsers()
     fetchRepos()
@@ -32,6 +39,25 @@ const Sidebar = () => {
 
   return (
     <aside className="gm-sidebar">
+      <div className="gm-sidebar-section">
+        <p className="gm-section-label">Organisation</p>
+        <div className="gm-org-row">
+          <input
+            type="text"
+            className="gm-input"
+            placeholder="e.g. adobe, google"
+            value={org}
+            onChange={(e) => setOrg(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleOrgChange()}
+          />
+          <button className="gm-org-btn" onClick={handleOrgChange} title="Load organisation">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
       <div className="gm-sidebar-section">
         <p className="gm-section-label">Date Range</p>
         <div className="gm-date-inputs">

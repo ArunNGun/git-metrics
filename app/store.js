@@ -18,6 +18,8 @@ export const usePRStore = create((set, get) => (
     fromDate: moment().subtract(60, 'days').format('YYYY-MM-DD'),
     toDate: moment().format('YYYY-MM-DD'),
     repoName: '',
+    org: 'adobe',
+    setOrg: (org) => set({ org }),
     setRepoName: (repo) => set({ repoName: repo }),
     setFilterTab: (tab) => set({ filterTab: tab }),
     setIsFetching: (status) => set({ isFetching: status }),
@@ -40,7 +42,7 @@ export const usePRStore = create((set, get) => (
     },
     fetchUsers: async () => {
       set({ isFetchingUsers: true })
-      axios.get('api/users'
+      axios.get('api/users', { params: { org: get().org } }
       ).then(res => {
         set({ gitUsers: res?.data })
         set({ isFetchingUsers: false })
@@ -51,7 +53,7 @@ export const usePRStore = create((set, get) => (
     },
     fetchRepos: async () => {
       set({ isFetchingRepos: true })
-      axios.get('api/repos'
+      axios.get('api/repos', { params: { org: get().org } }
       ).then(res => {
         set({ repos: res?.data })
         set({ isFetchingRepos: false })

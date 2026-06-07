@@ -1,5 +1,5 @@
-const REPO_QRY = `query {
-    organization(login: "adobe") {
+const REPO_QRY = (org) => `query {
+    organization(login: "${org}") {
       repositories(first: 100) {
         nodes {
           name
@@ -11,8 +11,8 @@ const REPO_QRY = `query {
   `
 
 export default async function ({
-    octokit
+    octokit, org = 'adobe'
 }) {
-    const data = await octokit.graphql(REPO_QRY)
+    const data = await octokit.graphql(REPO_QRY(org))
     return data
 }
