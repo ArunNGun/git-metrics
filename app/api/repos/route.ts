@@ -1,9 +1,10 @@
 //@ts-ignore
+export const dynamic = 'force-dynamic'
 import fetchRepos from '../../services/fetchRepos'
 import {proccessRepo} from '../../helpers/repoHelper'
 const { Octokit } = require('@octokit/core')
 
-export async function GET(request: Request){
+export async function GET(request: any){
     try {
         const { searchParams } = new URL(request.url)
         const org = searchParams.get('org') || 'adobe'
