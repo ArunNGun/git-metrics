@@ -1,5 +1,8 @@
 {
   "name": "git_pr_metrics",
+  "engines": {
+    "node": ">=20.x"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
